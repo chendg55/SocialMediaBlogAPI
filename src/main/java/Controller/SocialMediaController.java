@@ -32,8 +32,6 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.post("/register", this::postNewAccountHandler);
         app.post("/login", this::postLoginHandler);
-        app.start(8080);
-
         return app;
     }
 

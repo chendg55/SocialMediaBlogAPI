@@ -25,7 +25,7 @@ public class AccountService {
     public Account registerNewAccount(Account account) {
         if (account.getUsername().isBlank())
             return null;
-        if (account.getPassword().isBlank() || account.getPassword().length() < 3)
+        if (account.getPassword().isBlank() || account.getPassword().length() < 4)
             return null;
         if (accountDAO.getAccountByUsername(account.getUsername()) != null) {
             return null;
@@ -34,6 +34,11 @@ public class AccountService {
     }
 
     public Account verifyLogin(Account account) {
-        return accountDAO.getAccountByUsername(account.getUsername());
+        Account storedAccount = accountDAO.getAccountByUsername(account.getUsername());
+        if (storedAccount == null)
+            return null;
+        else if (account.getPassword().equals(storedAccount.getPassword()))
+            return storedAccount;
+        else return null;
     }
 }
