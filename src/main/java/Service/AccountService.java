@@ -33,6 +33,13 @@ public class AccountService {
         else return accountDAO.addAccount(account);
     }
 
+    /**
+     * Use the accountDAO to verify a login attempt
+     * Username must match an existing account
+     * Password must be correct
+     * @param account an account object
+     * @return account if it was successfully persisted, null if it was not successfully persisted
+     */
     public Account verifyLogin(Account account) {
         Account storedAccount = accountDAO.getAccountByUsername(account.getUsername());
         if (storedAccount == null)
